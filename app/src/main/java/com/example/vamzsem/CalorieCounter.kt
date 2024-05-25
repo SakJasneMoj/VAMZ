@@ -1,4 +1,3 @@
-// CalorieCounter.kt
 package com.example.vamzsem
 
 import androidx.compose.animation.animateColorAsState
@@ -13,19 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.vamzsem.R
+import com.example.vamzsem.FoodViewModel
 
 @Composable
-fun CalorieCounter(viewModel: CalorieCounterViewModel = viewModel()) {
-    val calories = viewModel.calories
+fun CalorieCounter(viewModel: FoodViewModel) {
+    val totalCalories by viewModel.totalCalories.collectAsState(initial = 0)
 
     Column(
         modifier = Modifier
@@ -34,7 +31,7 @@ fun CalorieCounter(viewModel: CalorieCounterViewModel = viewModel()) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        DrawCalorieArc(calories, 2000)
+        DrawCalorieArc(totalCalories, 2000)
     }
 }
 
@@ -53,7 +50,6 @@ fun DrawCalorieArc(currentCalories: Int, maxCalories: Int) {
 
     val robotoSlabFontFamily = FontFamily(
         Font(R.font.robotoslab_regular),
-
         Font(R.font.robotoslab_bold, FontWeight.Bold)
     )
 

@@ -18,7 +18,7 @@ class FoodViewModel(
     private val _totalCalories = MutableStateFlow(0)
     val totalCalories: StateFlow<Int> = _totalCalories.asStateFlow()
 
-    private var currentUserId: String = "" // Set this when a user logs in
+    private var currentUserId: String = "1" // For simplicity, use a fixed user ID
     private val todayDate: Date = Calendar.getInstance().time
 
     init {
@@ -33,19 +33,19 @@ class FoodViewModel(
     fun insertFood(food: Food) {
         viewModelScope.launch {
             foodRepository.insertFood(food.copy(userId = currentUserId, date = todayDate))
+            // Update the food list after insertion
+            foodRepository.getFoodByUserAndDate(currentUserId, todayDate).collect { foods ->
+                _foodList.value = foods
+                _totalCalories.value = foods.sumOf { it.calories }
+            }
         }
     }
 
     fun deleteFood(food: Food) {
         viewModelScope.launch {
             foodRepository.deleteFood(food)
-        }
-    }
-
-    fun setUserId(userId: String) {
-        currentUserId = userId
-        viewModelScope.launch {
-            foodRepository.getFoodByUserAndDate(userId, todayDate).collect { foods ->
+            // Update the food list after deletion
+            foodRepository.getFoodByUserAndDate(currentUserId, todayDate).collect { foods ->
                 _foodList.value = foods
                 _totalCalories.value = foods.sumOf { it.calories }
             }

@@ -11,7 +11,7 @@ fun rememberWindowInfo(): WindowInfo{
     val configuration = LocalConfiguration.current
     return WindowInfo(
         screenWidthInfo = when {
-            configuration.screenWidthDp < 600 -> WindowInfo.WindowType.Compact
+            configuration.screenWidthDp < 500 -> WindowInfo.WindowType.Compact
             configuration.screenWidthDp < 840 -> WindowInfo.WindowType.Medium
             else -> WindowInfo.WindowType.Expanded
         },
