@@ -1,6 +1,9 @@
 // CalorieCounter.kt
 package com.example.vamzsem
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.TweenSpec
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -10,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -17,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-
+import com.example.vamzsem.R
 
 @Composable
 fun CalorieCounter(viewModel: CalorieCounterViewModel = viewModel()) {
@@ -30,29 +34,26 @@ fun CalorieCounter(viewModel: CalorieCounterViewModel = viewModel()) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        DrawCalorieArc(calories, 1)
-        Spacer(modifier = Modifier.height(16.dp))
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Button(onClick = { viewModel.incrementCalories() }) {
-                Text("Add")
-            }
-            Button(onClick = { viewModel.decrementCalories() }) {
-                Text("Subtract")
-            }
-        }
+        DrawCalorieArc(calories, 2000)
     }
 }
 
 @Composable
 fun DrawCalorieArc(currentCalories: Int, maxCalories: Int) {
-    val progress = currentCalories.toFloat() / maxCalories
-    val arcColor = if (currentCalories <= maxCalories) Color(0xFF66BB6A) else Color(0xFFEF5350)
-    val displayProgress = if (currentCalories <= maxCalories) progress else 1f
+    val targetProgress = currentCalories.toFloat() / maxCalories
+    val animatedProgress by animateFloatAsState(
+        targetValue = if (currentCalories <= maxCalories) targetProgress else 1f,
+        animationSpec = TweenSpec(durationMillis = 1000)
+    )
+
+    val arcColor by animateColorAsState(
+        targetValue = if (currentCalories <= maxCalories) Color(0xFF66BB6A) else Color(0xFFEF5350),
+        animationSpec = TweenSpec(durationMillis = 1000)
+    )
 
     val robotoSlabFontFamily = FontFamily(
         Font(R.font.robotoslab_regular),
+
         Font(R.font.robotoslab_bold, FontWeight.Bold)
     )
 
@@ -60,13 +61,13 @@ fun DrawCalorieArc(currentCalories: Int, maxCalories: Int) {
         Canvas(modifier = Modifier.size(200.dp)) {
             drawArcWithAngle(
                 startAngle = 135f,
-                sweepAngle = 270f * displayProgress,
+                sweepAngle = 270f * animatedProgress,
                 color = arcColor,
                 strokeWidth = 40f
             )
             drawArcWithAngle(
-                startAngle = 135f + 270f * displayProgress,
-                sweepAngle = 270f * (1 - displayProgress),
+                startAngle = 135f + 270f * animatedProgress,
+                sweepAngle = 270f * (1 - animatedProgress),
                 color = Color(0xFFB0BEC5),
                 strokeWidth = 40f
             )
