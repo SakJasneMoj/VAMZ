@@ -1,16 +1,23 @@
-package com.example.vamzsem
-
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.vamzsem.FoodRepository
+import com.example.vamzsem.UserRepository
 import com.example.vamzsem.food_database.Food
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.util.*
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class FoodViewModel(
     private val foodRepository: FoodRepository,
     private val userRepository: UserRepository
-) : ViewModel() {
+) : ViewModel(), LifecycleObserver {
 
     private val _foodList = MutableStateFlow<List<Food>>(emptyList())
     val foodList: StateFlow<List<Food>> = _foodList.asStateFlow()
@@ -19,9 +26,20 @@ class FoodViewModel(
     val totalCalories: StateFlow<Int> = _totalCalories.asStateFlow()
 
     private var currentUserId: String = "1" // For simplicity, use a fixed user ID
-    private val todayDate: Date = Calendar.getInstance().time
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    private val todayDate: String
+        get() = dateFormat.format(Date())
 
     init {
+        fetchFoods()
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    fun onResume() {
+        fetchFoods()
+    }
+
+    fun fetchFoods() {
         viewModelScope.launch {
             foodRepository.getFoodByUserAndDate(currentUserId, todayDate).collect { foods ->
                 _foodList.value = foods
@@ -33,22 +51,14 @@ class FoodViewModel(
     fun insertFood(food: Food) {
         viewModelScope.launch {
             foodRepository.insertFood(food.copy(userId = currentUserId, date = todayDate))
-            // Update the food list after insertion
-            foodRepository.getFoodByUserAndDate(currentUserId, todayDate).collect { foods ->
-                _foodList.value = foods
-                _totalCalories.value = foods.sumOf { it.calories }
-            }
+            fetchFoods() // Fetch data after insertion
         }
     }
 
     fun deleteFood(food: Food) {
         viewModelScope.launch {
             foodRepository.deleteFood(food)
-            // Update the food list after deletion
-            foodRepository.getFoodByUserAndDate(currentUserId, todayDate).collect { foods ->
-                _foodList.value = foods
-                _totalCalories.value = foods.sumOf { it.calories }
-            }
+            fetchFoods() // Fetch data after deletion
         }
     }
 }

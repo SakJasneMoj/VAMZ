@@ -1,5 +1,7 @@
 package com.example.vamzsem
 
+
+import FoodViewModel
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.animateFloatAsState
@@ -18,7 +20,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.vamzsem.FoodViewModel
 
 @Composable
 fun CalorieCounter(viewModel: FoodViewModel) {

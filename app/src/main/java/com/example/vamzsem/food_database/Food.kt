@@ -12,5 +12,5 @@ data class Food(
     val nameOfFood: String,
     val typeOfFood: String,
     val calories: Int, // Change to Int for easier calculations
-    val date: Date // Date when the food was added
+    val date: String // Date when the food was added
 )

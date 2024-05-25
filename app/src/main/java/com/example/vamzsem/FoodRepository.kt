@@ -3,7 +3,6 @@ package com.example.vamzsem
 import com.example.vamzsem.food_database.Food
 import com.example.vamzsem.food_database.FoodDao
 import kotlinx.coroutines.flow.Flow
-import java.util.*
 
 class FoodRepository(private val dao: FoodDao) {
     suspend fun insertFood(food: Food) {
@@ -18,11 +17,11 @@ class FoodRepository(private val dao: FoodDao) {
         return dao.getFoodByUser(userId)
     }
 
-    fun getFoodByUserAndDate(userId: String, date: Date): Flow<List<Food>> {
+    fun getFoodByUserAndDate(userId: String, date: String): Flow<List<Food>> {
         return dao.getFoodByUserAndDate(userId, date)
     }
 
-    fun getTotalCaloriesByUserAndDate(userId: String, date: Date): Flow<Int> {
+    fun getTotalCaloriesByUserAndDate(userId: String, date: String): Flow<Int> {
         return dao.getTotalCaloriesByUserAndDate(userId, date)
     }
 }
