@@ -1,14 +1,18 @@
+package com.example.vamzsem
+
+import android.content.Context
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.vamzsem.FoodRepository
-import com.example.vamzsem.UserRepository
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.vamzsem.food_database.Food
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -16,7 +20,8 @@ import java.util.Locale
 
 class FoodViewModel(
     private val foodRepository: FoodRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val context: Context
 ) : ViewModel(), LifecycleObserver {
 
     private val _foodList = MutableStateFlow<List<Food>>(emptyList())
@@ -52,6 +57,7 @@ class FoodViewModel(
         viewModelScope.launch {
             foodRepository.insertFood(food.copy(userId = currentUserId, date = todayDate))
             fetchFoods() // Fetch data after insertion
+            triggerWidgetUpdate()
         }
     }
 
@@ -59,6 +65,27 @@ class FoodViewModel(
         viewModelScope.launch {
             foodRepository.deleteFood(food)
             fetchFoods() // Fetch data after deletion
+            triggerWidgetUpdate()
         }
     }
+
+    private fun triggerWidgetUpdate() {
+        val workManager = WorkManager.getInstance(context)
+        val workRequest = OneTimeWorkRequestBuilder<DailyUpdateWorker>().build()
+        workManager.enqueue(workRequest)
+    }
+
+
+
+    fun fetchFoodsByDate(date: String, onResult: (Int) -> Unit) {
+        viewModelScope.launch {
+            val userId = "1" // Replace with actual user ID logic
+            val calories = foodRepository.getTotalCaloriesByUserAndDate(userId, date).first()
+            onResult(calories)
+        }
+    }
+
+
+
+
 }

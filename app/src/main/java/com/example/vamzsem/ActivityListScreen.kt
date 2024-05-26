@@ -1,6 +1,8 @@
 package com.example.vamzsem
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -26,32 +28,36 @@ fun ActivityListScreen(timerViewModel: TimerViewModel) {
             style = MaterialTheme.typography.h6,
             fontSize = 24.sp
         )
-        activities.forEach { activity ->
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp)
-            ) {
-                Row(
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            items(activities) { activity ->
+                Box(
                     modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp)
                 ) {
-                    Text(
-                        text = "${activity.activityName} - ${activity.timeSpent / 60} min ${activity.timeSpent % 60} sec",
-                        style = MaterialTheme.typography.body1,
-                        fontSize = 20.sp,
-                        modifier = Modifier.weight(1f)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Button(
-                        onClick = {
-                            timerViewModel.removeActivity(activity)
-                        },
-                        modifier = Modifier.align(Alignment.CenterVertically)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = "Remove")
+                        Text(
+                            text = "${activity.activityName} - ${activity.timeSpent / 60} min ${activity.timeSpent % 60} sec",
+                            style = MaterialTheme.typography.body1,
+                            fontSize = 20.sp,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Button(
+                            onClick = {
+                                timerViewModel.removeActivity(activity)
+                            },
+                            modifier = Modifier.align(Alignment.CenterVertically)
+                        ) {
+                            Text(text = "Remove")
+                        }
                     }
                 }
             }

@@ -1,10 +1,15 @@
 package com.example.vamzsem
 
+import androidx.annotation.WorkerThread
 import com.example.vamzsem.food_database.Food
 import com.example.vamzsem.food_database.FoodDao
 import kotlinx.coroutines.flow.Flow
 
 class FoodRepository(private val dao: FoodDao) {
+
+
+
+
     suspend fun insertFood(food: Food) {
         dao.insertFood(food)
     }
@@ -24,4 +29,11 @@ class FoodRepository(private val dao: FoodDao) {
     fun getTotalCaloriesByUserAndDate(userId: String, date: String): Flow<Int> {
         return dao.getTotalCaloriesByUserAndDate(userId, date)
     }
+
+    fun getFoodsForDate(date: String): List<Food> {
+        return dao.getFoodsForDate(date)
+    }
+
+
+
 }

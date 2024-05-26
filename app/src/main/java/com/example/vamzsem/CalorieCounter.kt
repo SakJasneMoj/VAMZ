@@ -1,7 +1,7 @@
 package com.example.vamzsem
 
 
-import FoodViewModel
+
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.animateFloatAsState

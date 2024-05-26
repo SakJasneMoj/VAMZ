@@ -1,18 +1,11 @@
 package com.example.vamzsem
 
-import FoodViewModel
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
-
 import com.example.vamzsem.ui.theme.VamzSemTheme
-
-
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,10 +15,8 @@ class MainActivity : ComponentActivity() {
         val userRepository = app.userRepository
         val timerRepository = app.timerRepository
 
-        val foodViewModelFactory = FoodViewModelFactory(foodRepository, userRepository)
-        val timerViewModelFactory = TimerViewModelFactory(application, timerRepository)
-
-
+        val foodViewModelFactory = FoodViewModelFactory(foodRepository, userRepository, applicationContext)
+        val timerViewModelFactory = TimerViewModelFactory(application, timerRepository, foodRepository)
 
         val foodViewModel: FoodViewModel by viewModels { foodViewModelFactory }
         val timerViewModel: TimerViewModel by viewModels { timerViewModelFactory }

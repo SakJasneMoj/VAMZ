@@ -9,7 +9,11 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TimerViewModel(private val timerRepository: TimerRepository, application: Application) : AndroidViewModel(application) {
+class TimerViewModel(
+    private val timerRepository: TimerRepository,
+    private val foodRepository: FoodRepository,
+    application: Application
+) : AndroidViewModel(application) {
     private val _isRunning = MutableStateFlow(false)
     val isRunning: StateFlow<Boolean> = _isRunning
 
@@ -53,22 +57,56 @@ class TimerViewModel(private val timerRepository: TimerRepository, application: 
         _activities.value = timerRepository.getTodayTimers()
     }
 
-
     fun getTimersForDate(date: String, onResult: (List<TimerEntity>) -> Unit) {
         viewModelScope.launch {
-            val timers = timerRepository.getTimersForDate(date)
-            onResult(timers)
+            try {
+                println("Fetching timers for date: $date")  // Logging the date
+                val timers = timerRepository.getTimersForDate(date)
+                onResult(timers)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
-
-
     fun removeActivity(activity: TimerEntity) {
         viewModelScope.launch {
-            timerRepository.delete(activity)
-            _activities.value = timerRepository.getTodayTimers()
-            _totalTimeInSeconds.value += activity.timeSpent.toInt()
-            timerRepository.saveTime(_totalTimeInSeconds.value)
+            try {
+                timerRepository.delete(activity)
+                _activities.value = timerRepository.getTodayTimers()
+                _totalTimeInSeconds.value += activity.timeSpent.toInt()
+                timerRepository.saveTime(_totalTimeInSeconds.value)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun getTotalCaloriesForDate(date: String, onResult: (Int) -> Unit) {
+        viewModelScope.launch {
+            try {
+                println("Fetching foods for date: $date")  // Logging the date
+                val foods = foodRepository.getFoodsForDate(date)
+                val totalCalories = foods.sumOf { it.calories }
+                onResult(totalCalories)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun getTodayData(onResult: (String, List<TimerEntity>, Int) -> Unit) {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val today = sdf.format(Date())
+        viewModelScope.launch {
+            try {
+                val activities = timerRepository.getTimersForDate(today)
+                val foods = foodRepository.getFoodsForDate(today)
+                val totalCalories = foods.sumOf { it.calories }
+                onResult(today, activities, totalCalories)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }

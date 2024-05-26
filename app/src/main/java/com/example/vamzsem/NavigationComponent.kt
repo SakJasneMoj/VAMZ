@@ -1,6 +1,5 @@
 package com.example.vamzsem
 
-import FoodViewModel
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
@@ -23,7 +22,7 @@ fun NavigationComponent() {
             SportsScreen(navController = navController, timerViewModel = timerViewModel)
         }
         composable(Screen.Calendar.route) {
-            CalendarScreen(navController = navController)
+            CalendarScreen(navController = navController, timerViewModel = timerViewModel, foodViewModel = foodViewModel)
         }
         composable(Screen.Settings.route) {
             SettingsScreen(navController = navController)

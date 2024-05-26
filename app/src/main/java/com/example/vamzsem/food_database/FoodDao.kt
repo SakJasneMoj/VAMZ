@@ -21,4 +21,10 @@ interface FoodDao {
 
     @Query("SELECT SUM(calories) FROM food WHERE userId = :userId AND date = :date")
     fun getTotalCaloriesByUserAndDate(userId: String, date: String): Flow<Int>
+
+
+    @Query("SELECT * FROM food WHERE date = :date")
+    fun getFoodsForDate(date: String): List<Food>
+
+
 }
