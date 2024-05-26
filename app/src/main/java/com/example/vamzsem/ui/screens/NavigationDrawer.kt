@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.screens
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.TextStyle
+import com.example.vamzsem.R
 import com.example.vamzsem.ui.components.MenuItem
 
 @Composable

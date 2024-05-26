@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.vamzsem.DrawerBody
+import com.example.vamzsem.ui.screens.DrawerBody
 import com.example.vamzsem.ui.screens.Screen
 import com.example.vamzsem.ui.utils.GradientBackground
 import com.example.vamzsem.ui.utils.WindowInfo
