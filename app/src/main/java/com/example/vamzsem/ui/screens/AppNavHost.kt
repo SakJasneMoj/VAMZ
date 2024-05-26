@@ -1,13 +1,15 @@
 package com.example.vamzsem
 
 
-import ProfileViewModel
+import com.example.vamzsem.viewModel.ProfileViewModel
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.vamzsem.viewModel.FoodViewModel
+import com.example.vamzsem.viewModel.TimerViewModel
 
 @Composable
 fun AppNavHost(

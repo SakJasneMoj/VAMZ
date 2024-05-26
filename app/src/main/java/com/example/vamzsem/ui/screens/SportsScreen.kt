@@ -1,22 +1,38 @@
 package com.example.vamzsem
 
-import ProfileViewModel
+import com.example.vamzsem.viewModel.ProfileViewModel
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.hilt.navigation.compose.hiltViewModel
-
-
+import com.example.vamzsem.viewModel.TimerViewModel
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
-fun SportsScreen(navController: NavHostController, timerViewModel: TimerViewModel, profileViewModel: ProfileViewModel) {
+fun SportsScreen(
+    navController: NavHostController,
+    timerViewModel: TimerViewModel,
+    profileViewModel: ProfileViewModel
+) {
     val windowInfo = rememberWindowInfo()
+    val exerciseMaxTime by profileViewModel.exerciseMaxTime.collectAsState()
+    val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    val today = sdf.format(Date())
+    val coroutineScope = rememberCoroutineScope()
+    var totalExerciseTime by remember { mutableStateOf(0L) }
 
-    MenuLayout(windowInfo = windowInfo, navController = navController,profileViewModel = profileViewModel) {
+    LaunchedEffect(today) {
+        coroutineScope.launch {
+            timerViewModel.getTotalTimeSpentForDate(today) { totalTime ->
+                totalExerciseTime = totalTime
+            }
+        }
+    }
+
+    MenuLayout(windowInfo = windowInfo, navController = navController, profileViewModel = profileViewModel) {
         if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) {
             Column(
                 modifier = Modifier
@@ -27,7 +43,11 @@ fun SportsScreen(navController: NavHostController, timerViewModel: TimerViewMode
                         .fillMaxWidth()
                         .weight(1f)
                 ) {
-                    CountdownTimer(timerViewModel = timerViewModel)
+                    CountdownTimer(
+                        timerViewModel = timerViewModel,
+                        maxTimeInMinutes = (exerciseMaxTime * 60 - totalExerciseTime.toInt()) / 60,
+                        date = today
+                    )
                 }
 
                 Box(
@@ -49,7 +69,11 @@ fun SportsScreen(navController: NavHostController, timerViewModel: TimerViewMode
                         .weight(1f)
                         .fillMaxHeight()
                 ) {
-                    CountdownTimer(timerViewModel = timerViewModel)
+                    CountdownTimer(
+                        timerViewModel = timerViewModel,
+                        maxTimeInMinutes = (exerciseMaxTime * 60 - totalExerciseTime.toInt()) / 60,
+                        date = today
+                    )
                 }
 
                 Box(

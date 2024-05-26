@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.example.vamzsem.food_database.Food
+import com.example.vamzsem.data.repository.FoodRepository
+import com.example.vamzsem.data.database.foodDatabase.Food
+import com.example.vamzsem.data.worker.DailyUpdateWorker
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

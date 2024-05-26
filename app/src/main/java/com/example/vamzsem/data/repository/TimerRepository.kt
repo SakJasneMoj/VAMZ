@@ -53,4 +53,10 @@ class TimerRepository(private val timerDao: TimerDao, private val context: Conte
             apply()
         }
     }
+
+    suspend fun getTotalTimeSpentForDate(date: String): Long {
+        return timerDao.getTotalTimeSpentForDate(date) ?: 0L
+    }
+
+
 }

@@ -1,6 +1,6 @@
 package com.example.vamzsem
 
-import ProfileViewModel
+import com.example.vamzsem.viewModel.ProfileViewModel
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -9,6 +9,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.vamzsem.viewModel.FoodViewModel
+import com.example.vamzsem.viewModel.TimerViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

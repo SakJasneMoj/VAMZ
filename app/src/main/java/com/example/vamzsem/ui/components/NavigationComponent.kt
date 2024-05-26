@@ -1,14 +1,19 @@
 package com.example.vamzsem
 
 
-import ProfileViewModel
+import com.example.vamzsem.viewModel.ProfileViewModel
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.vamzsem.ui.screens.CalendarScreen
+import com.example.vamzsem.ui.screens.CaloriesScreen
+import com.example.vamzsem.ui.screens.SettingsScreen
+import com.example.vamzsem.ui.screens.SportsScreen
+import com.example.vamzsem.viewModel.FoodViewModel
+import com.example.vamzsem.viewModel.TimerViewModel
 
 @Composable
 fun NavigationComponent() {

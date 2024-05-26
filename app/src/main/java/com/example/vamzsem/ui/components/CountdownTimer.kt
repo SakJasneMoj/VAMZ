@@ -11,16 +11,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
+import com.example.vamzsem.viewModel.TimerViewModel
 import kotlinx.coroutines.delay
 import java.util.concurrent.TimeUnit
 
 @Composable
-fun CountdownTimer(timerViewModel: TimerViewModel, maxTimeInMinutes: Int = 100) {
+fun CountdownTimer(timerViewModel: TimerViewModel, maxTimeInMinutes: Int = 100, date: String) {
     val isRunning by timerViewModel.isRunning.collectAsState()
     val totalTimeInSeconds by timerViewModel.totalTimeInSeconds.collectAsState()
     var showDialog by remember { mutableStateOf(false) }
     val maxTimeInSeconds = maxTimeInMinutes * 60
     var sessionStartTime by remember { mutableStateOf(maxTimeInSeconds) }
+    var adjustedMaxTimeInSeconds by remember { mutableStateOf(maxTimeInSeconds) }
+
+    LaunchedEffect(date) {
+        timerViewModel.getTotalTimeSpentForDate(date) { totalTimeSpent ->
+            adjustedMaxTimeInSeconds = maxTimeInSeconds - totalTimeSpent.toInt()
+            sessionStartTime = adjustedMaxTimeInSeconds
+            timerViewModel.setTimer(adjustedMaxTimeInSeconds)
+        }
+    }
 
     LaunchedEffect(isRunning) {
         while (isRunning && totalTimeInSeconds > 0) {
@@ -45,7 +55,7 @@ fun CountdownTimer(timerViewModel: TimerViewModel, maxTimeInMinutes: Int = 100) 
                 drawArc(
                     color = Color.Blue,
                     startAngle = -90f,
-                    sweepAngle = (totalTimeInSeconds / maxTimeInSeconds.toFloat()) * 360,
+                    sweepAngle = (totalTimeInSeconds / adjustedMaxTimeInSeconds.toFloat()) * 360,
                     useCenter = false,
                     style = Stroke(width = 8.dp.toPx())
                 )

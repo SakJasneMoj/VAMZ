@@ -3,6 +3,9 @@ package com.example.vamzsem
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.vamzsem.data.database.timerDatabase.TimerEntity
+import com.example.vamzsem.data.repository.FoodRepository
+import com.example.vamzsem.data.repository.TimerRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -107,6 +110,13 @@ class TimerViewModel(
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+        }
+    }
+
+    fun getTotalTimeSpentForDate(date: String, onResult: (Long) -> Unit) {
+        viewModelScope.launch {
+            val totalTime = timerRepository.getTotalTimeSpentForDate(date) ?: 0L
+            onResult(totalTime)
         }
     }
 }

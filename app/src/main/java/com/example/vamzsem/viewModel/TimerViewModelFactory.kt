@@ -3,6 +3,8 @@ package com.example.vamzsem
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.vamzsem.data.repository.FoodRepository
+import com.example.vamzsem.data.repository.TimerRepository
 
 class TimerViewModelFactory(
     private val application: Application,

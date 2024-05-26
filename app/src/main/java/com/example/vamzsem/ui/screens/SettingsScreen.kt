@@ -1,23 +1,18 @@
 package com.example.vamzsem
 
-import ProfileViewModel
-import androidx.compose.foundation.Image
+import com.example.vamzsem.viewModel.ProfileViewModel
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import coil.compose.rememberImagePainter
 
 @Composable
 fun SettingsScreen(navController: NavHostController, profileViewModel: ProfileViewModel) {
@@ -35,11 +30,9 @@ fun SettingsScreen(navController: NavHostController, profileViewModel: ProfileVi
         }
     }
 }
-
 @Composable
 fun ProfileSection(profileViewModel: ProfileViewModel) {
     val profileName by profileViewModel.profileName.collectAsState()
-    val profileImage by profileViewModel.profileImage.collectAsState()
     var showNameDialog by remember { mutableStateOf(false) }
 
     Column(
@@ -49,19 +42,7 @@ fun ProfileSection(profileViewModel: ProfileViewModel) {
             .fillMaxWidth()
             .padding(bottom = 16.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .size(150.dp)
-                .clip(CircleShape)
-        ) {
-            Image(
-                painter = rememberImagePainter(data = profileImage.ifEmpty { "https://via.placeholder.com/150" }),
-                contentDescription = "Profile Image",
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-        }
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(30.dp))
         Text(text = profileName, fontSize = 24.sp, color = Color.Black)
         IconButton(onClick = { showNameDialog = true }) {
             Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit Profile")

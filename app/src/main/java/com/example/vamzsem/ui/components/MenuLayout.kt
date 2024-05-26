@@ -1,6 +1,6 @@
 package com.example.vamzsem
 
-import ProfileViewModel
+import com.example.vamzsem.viewModel.ProfileViewModel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*

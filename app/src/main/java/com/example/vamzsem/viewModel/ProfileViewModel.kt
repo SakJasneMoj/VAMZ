@@ -1,6 +1,7 @@
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.vamzsem.data.repository.ProfileRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -10,6 +11,8 @@ class ProfileViewModel(
     private val context: Context,
     private val repository: ProfileRepository
 ) : ViewModel() {
+
+
 
     private val _profileName = MutableStateFlow(repository.getProfileName())
     val profileName: StateFlow<String> = _profileName.asStateFlow()
@@ -74,4 +77,8 @@ class ProfileViewModel(
             repository.saveExerciseReminderNotification(_exerciseReminderNotification.value)
         }
     }
+
+
+
+
 }

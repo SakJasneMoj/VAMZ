@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.data
 
 import androidx.annotation.WorkerThread
 import com.example.vamzsem.food_database.Food

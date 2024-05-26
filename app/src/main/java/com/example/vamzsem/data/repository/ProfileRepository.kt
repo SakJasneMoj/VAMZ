@@ -52,4 +52,6 @@ class ProfileRepository(context: Context) {
     fun getExerciseReminderNotification(): Boolean {
         return sharedPreferences.getBoolean("exerciseReminderNotification", false)
     }
+
+
 }

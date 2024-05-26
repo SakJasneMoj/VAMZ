@@ -16,4 +16,10 @@ interface TimerDao {
 
     @Query("SELECT * FROM timer_entity WHERE date = :date")
     suspend fun getTimersForDate(date: String): List<TimerEntity>
+
+    @Query("SELECT SUM(timeSpent) FROM timer_entity WHERE date = :date")
+    suspend fun getTotalTimeSpentForDate(date: String): Long?
+
+
+
 }

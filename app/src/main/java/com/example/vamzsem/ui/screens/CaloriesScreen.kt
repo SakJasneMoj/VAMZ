@@ -1,6 +1,6 @@
 package com.example.vamzsem
 
-import ProfileViewModel
+import com.example.vamzsem.viewModel.ProfileViewModel
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -11,7 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import com.example.vamzsem.food_database.Food
+import com.example.vamzsem.data.database.foodDatabase.Food
+import com.example.vamzsem.viewModel.FoodViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
