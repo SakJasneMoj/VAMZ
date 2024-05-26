@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.viewModel
 
 import android.content.Context
 import androidx.lifecycle.Lifecycle
@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import com.example.vamzsem.data.database.userDatabase.UserRepository
 import com.example.vamzsem.data.repository.FoodRepository
 import com.example.vamzsem.data.database.foodDatabase.Food
 import com.example.vamzsem.data.worker.DailyUpdateWorker

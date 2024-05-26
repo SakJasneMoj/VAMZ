@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.viewModel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

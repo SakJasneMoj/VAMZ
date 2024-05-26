@@ -1,13 +1,19 @@
 package com.example.vamzsem
 
-import ProfileRepository
-import ProfileViewModel
+import com.example.vamzsem.data.repository.ProfileRepository
+import com.example.vamzsem.viewModel.ProfileViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.navigation.compose.rememberNavController
+import com.example.vamzsem.ui.screens.AppNavHost
 import com.example.vamzsem.ui.theme.VamzSemTheme
+import com.example.vamzsem.viewModel.FoodViewModel
+import com.example.vamzsem.viewModel.FoodViewModelFactory
+import com.example.vamzsem.viewModel.ProfileViewModelFactory
+import com.example.vamzsem.viewModel.TimerViewModel
+import com.example.vamzsem.viewModel.TimerViewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

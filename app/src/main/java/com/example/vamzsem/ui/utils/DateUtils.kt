@@ -1,3 +1,5 @@
+package com.example.vamzsem.ui.utils
+
 import android.content.Context
 import android.content.SharedPreferences
 import java.text.SimpleDateFormat

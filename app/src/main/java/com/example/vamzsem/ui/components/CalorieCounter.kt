@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.components
 
 import com.example.vamzsem.viewModel.ProfileViewModel
 import androidx.compose.animation.animateColorAsState
@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.vamzsem.R
 import com.example.vamzsem.viewModel.FoodViewModel
 
 @Composable

@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.utils
 
 import java.util.concurrent.TimeUnit
 

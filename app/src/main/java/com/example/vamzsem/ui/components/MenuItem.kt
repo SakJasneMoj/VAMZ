@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.components
 
 import android.icu.text.CaseMap.Title
 import androidx.compose.ui.graphics.vector.ImageVector

@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.components
 
 import android.widget.CalendarView
 import androidx.compose.runtime.Composable

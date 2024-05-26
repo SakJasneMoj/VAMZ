@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.data.database.timerDatabase
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

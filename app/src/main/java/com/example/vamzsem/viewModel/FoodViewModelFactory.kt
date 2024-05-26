@@ -1,11 +1,10 @@
-package com.example.vamzsem
+package com.example.vamzsem.viewModel
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.vamzsem.data.database.userDatabase.UserRepository
 import com.example.vamzsem.data.repository.FoodRepository
-import com.example.vamzsem.viewModel.FoodViewModel
 
 class FoodViewModelFactory(
     private val foodRepository: FoodRepository,

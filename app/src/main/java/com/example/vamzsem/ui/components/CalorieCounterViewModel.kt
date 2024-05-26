@@ -1,5 +1,4 @@
-// CalorieCounterViewModel.kt
-package com.example.vamzsem
+package com.example.vamzsem.ui.components
 
 import androidx.lifecycle.ViewModel
 import androidx.compose.runtime.mutableStateOf

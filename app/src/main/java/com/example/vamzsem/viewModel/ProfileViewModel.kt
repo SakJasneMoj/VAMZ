@@ -1,3 +1,5 @@
+package com.example.vamzsem.viewModel
+
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -77,6 +79,7 @@ class ProfileViewModel(
             repository.saveExerciseReminderNotification(_exerciseReminderNotification.value)
         }
     }
+
 
 
 

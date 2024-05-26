@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.screens
 
 import com.example.vamzsem.viewModel.ProfileViewModel
 import androidx.compose.runtime.Composable
@@ -11,7 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import com.example.vamzsem.ui.components.AddFoodButton
+import com.example.vamzsem.ui.components.AddFoodDialog
+import com.example.vamzsem.ui.components.CalorieCounter
+import com.example.vamzsem.ui.components.FoodList
+import com.example.vamzsem.ui.components.MenuLayout
 import com.example.vamzsem.data.database.foodDatabase.Food
+import com.example.vamzsem.ui.utils.WindowInfo
+import com.example.vamzsem.ui.utils.rememberWindowInfo
 import com.example.vamzsem.viewModel.FoodViewModel
 import java.text.SimpleDateFormat
 import java.util.*

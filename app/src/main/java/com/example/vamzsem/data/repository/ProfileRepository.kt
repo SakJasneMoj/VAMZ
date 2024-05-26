@@ -1,3 +1,5 @@
+package com.example.vamzsem.data.repository
+
 import android.content.Context
 import android.content.SharedPreferences
 

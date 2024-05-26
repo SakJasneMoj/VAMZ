@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.screens
 
 
 import com.example.vamzsem.viewModel.ProfileViewModel
@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.vamzsem.ui.components.ActivityListScreen
 import com.example.vamzsem.viewModel.FoodViewModel
 import com.example.vamzsem.viewModel.TimerViewModel
 

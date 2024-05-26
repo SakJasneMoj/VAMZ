@@ -1,10 +1,11 @@
-package com.example.vamzsem
+package com.example.vamzsem.data.database.timerDatabase
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Delete
+import com.example.vamzsem.data.database.timerDatabase.TimerEntity
 
 @Dao
 interface TimerDao {

@@ -1,8 +1,7 @@
-package com.example.vamzsem.data
+package com.example.vamzsem.data.repository
 
-import androidx.annotation.WorkerThread
-import com.example.vamzsem.food_database.Food
-import com.example.vamzsem.food_database.FoodDao
+import com.example.vamzsem.data.database.foodDatabase.Food
+import com.example.vamzsem.data.database.foodDatabase.FoodDao
 import kotlinx.coroutines.flow.Flow
 
 class FoodRepository(private val dao: FoodDao) {

@@ -1,4 +1,4 @@
-package com.example.vamzsem.food_database
+package com.example.vamzsem.data.database.foodDatabase
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

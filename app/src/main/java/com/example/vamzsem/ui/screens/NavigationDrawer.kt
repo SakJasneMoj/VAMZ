@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.TextStyle
+import com.example.vamzsem.ui.components.MenuItem
 
 @Composable
 fun DrawerHeader() {

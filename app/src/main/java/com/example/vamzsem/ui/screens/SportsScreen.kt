@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.screens
 
 import com.example.vamzsem.viewModel.ProfileViewModel
 import androidx.compose.foundation.layout.*
@@ -6,6 +6,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.vamzsem.ui.components.ActivityListScreen
+import com.example.vamzsem.ui.components.CountdownTimer
+import com.example.vamzsem.ui.components.MenuLayout
+import com.example.vamzsem.ui.utils.WindowInfo
+import com.example.vamzsem.ui.utils.rememberWindowInfo
 import com.example.vamzsem.viewModel.TimerViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat

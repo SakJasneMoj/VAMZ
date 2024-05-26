@@ -1,23 +1,22 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.components
 
-import com.example.vamzsem.viewModel.ProfileViewModel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.CalendarToday
-import androidx.compose.material.icons.filled.DirectionsRun
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.material.icons.filled.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.vamzsem.DrawerBody
+import com.example.vamzsem.ui.screens.Screen
+import com.example.vamzsem.ui.utils.GradientBackground
+import com.example.vamzsem.ui.utils.WindowInfo
+import com.example.vamzsem.viewModel.ProfileViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -29,7 +28,7 @@ fun MenuLayout(
 ) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
-    val profileNameState = profileViewModel.profileName.collectAsState()
+    val profileName by profileViewModel.profileName.collectAsState()
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -49,7 +48,7 @@ fun MenuLayout(
                     )
             ) {
                 Column {
-                    DrawerHeader(profileNameState.value)
+                    DrawerHeader(profileName)
                     DrawerBody(
                         items = listOf(
                             MenuItem(

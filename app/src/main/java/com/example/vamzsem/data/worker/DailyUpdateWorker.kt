@@ -1,10 +1,13 @@
-package com.example.vamzsem
+package com.example.vamzsem.data.worker
 
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.example.vamzsem.ui.widgets.CaloriesWidgetProvider
+import com.example.vamzsem.viewModel.FoodViewModel
+import com.example.vamzsem.MyApplication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
@@ -39,7 +42,12 @@ class DailyUpdateWorker(
             }
 
             for (appWidgetId in appWidgetIds) {
-                CaloriesWidgetProvider.updateAppWidget(applicationContext, appWidgetManager, appWidgetId, totalCalories)
+                CaloriesWidgetProvider.updateAppWidget(
+                    applicationContext,
+                    appWidgetManager,
+                    appWidgetId,
+                    totalCalories
+                )
             }
         }
         return Result.success()

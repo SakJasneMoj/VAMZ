@@ -1,10 +1,11 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.widgets
 
-import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
+import com.example.vamzsem.MyApplication
+import com.example.vamzsem.R
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.flow.firstOrNull
 import java.text.SimpleDateFormat

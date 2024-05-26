@@ -1,5 +1,6 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.screens
 
+import com.example.vamzsem.ui.utils.WindowInfo
 import com.example.vamzsem.viewModel.ProfileViewModel
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,6 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.example.vamzsem.ui.components.MenuLayout
+import com.example.vamzsem.ui.utils.rememberWindowInfo
 
 @Composable
 fun SettingsScreen(navController: NavHostController, profileViewModel: ProfileViewModel) {

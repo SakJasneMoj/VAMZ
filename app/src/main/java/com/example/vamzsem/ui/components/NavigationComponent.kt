@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.components
 
 
 import com.example.vamzsem.viewModel.ProfileViewModel
@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.vamzsem.ui.screens.CalendarScreen
 import com.example.vamzsem.ui.screens.CaloriesScreen
+import com.example.vamzsem.ui.screens.Screen
 import com.example.vamzsem.ui.screens.SettingsScreen
 import com.example.vamzsem.ui.screens.SportsScreen
 import com.example.vamzsem.viewModel.FoodViewModel

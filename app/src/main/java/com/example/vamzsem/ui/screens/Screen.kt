@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.screens
 
 sealed class Screen(val route: String) {
     object Calories : Screen("calories")

@@ -2,7 +2,10 @@ package com.example.vamzsem
 
 import android.app.Application
 import androidx.room.Room
-import com.example.vamzsem.food_database.FoodDatabase
+import com.example.vamzsem.data.repository.FoodRepository
+import com.example.vamzsem.data.repository.TimerRepository
+import com.example.vamzsem.data.database.FoodDatabase
+import com.example.vamzsem.data.database.userDatabase.UserRepository
 
 class MyApplication : Application() {
 

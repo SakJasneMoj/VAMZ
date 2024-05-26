@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.data.database.userDatabase
 
 import androidx.room.Dao
 import androidx.room.Delete

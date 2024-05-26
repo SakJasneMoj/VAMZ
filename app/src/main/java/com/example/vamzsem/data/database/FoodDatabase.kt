@@ -1,13 +1,15 @@
-package com.example.vamzsem.food_database
+package com.example.vamzsem.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.vamzsem.Converters
-import com.example.vamzsem.TimerDao
-import com.example.vamzsem.TimerEntity
-import com.example.vamzsem.User
-import com.example.vamzsem.UserDao
+import com.example.vamzsem.ui.utils.Converters
+import com.example.vamzsem.data.database.timerDatabase.TimerDao
+import com.example.vamzsem.data.database.timerDatabase.TimerEntity
+import com.example.vamzsem.data.database.userDatabase.User
+import com.example.vamzsem.data.database.userDatabase.UserDao
+import com.example.vamzsem.data.database.foodDatabase.Food
+import com.example.vamzsem.data.database.foodDatabase.FoodDao
 
 @Database(entities = [Food::class, User::class, TimerEntity::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)

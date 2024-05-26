@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.utils
 
 import androidx.room.TypeConverter
 import java.util.*

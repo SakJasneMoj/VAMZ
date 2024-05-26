@@ -1,7 +1,6 @@
-package com.example.vamzsem
+package com.example.vamzsem.viewModel
 
 import com.example.vamzsem.data.repository.ProfileRepository
-import ProfileViewModel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

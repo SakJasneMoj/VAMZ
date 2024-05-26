@@ -1,6 +1,7 @@
-package com.example.vamzsem.food_database
+package com.example.vamzsem.data.database.foodDatabase
 
 import androidx.room.*
+import com.example.vamzsem.data.database.foodDatabase.Food
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 

@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.utils
 
 import android.app.DatePickerDialog
 import android.content.Context

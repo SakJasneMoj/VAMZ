@@ -1,4 +1,4 @@
-package com.example.vamzsem
+package com.example.vamzsem.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
