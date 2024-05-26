@@ -5,6 +5,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material.icons.filled.DirectionsRun
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -12,11 +15,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavHostController
 import kotlinx.coroutines.launch
+
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material.icons.filled.DirectionsRun
+import androidx.compose.material.icons.filled.Settings
+
+
 
 @Composable
 fun MenuLayout(
     windowInfo: WindowInfo,
+    navController: NavHostController,
     content: @Composable () -> Unit
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -44,26 +56,41 @@ fun MenuLayout(
                     DrawerBody(
                         items = listOf(
                             MenuItem(
-                                id = "home",
-                                title = "Home",
-                                contentDescription = "Go to home screen",
+                                id = Screen.Calories.route,
+                                title = "Calories",
+                                contentDescription = "Go to calories screen",
                                 icon = Icons.Default.Home
                             ),
                             MenuItem(
-                                id = "settings",
+                                id = Screen.Sports.route,
+                                title = "Sports",
+                                contentDescription = "Go to sports screen",
+                                icon = Icons.Default.DirectionsRun
+                            ),
+                            MenuItem(
+                                id = Screen.Calendar.route,
+                                title = "Calendar",
+                                contentDescription = "Go to calendar screen",
+                                icon = Icons.Default.CalendarToday
+                            ),
+                            MenuItem(
+                                id = Screen.Settings.route,
                                 title = "Settings",
                                 contentDescription = "Go to settings screen",
-                                icon = Icons.Default.Home
-                            ),
-                            MenuItem(
-                                id = "help",
-                                title = "Help",
-                                contentDescription = "Get help",
-                                icon = Icons.Default.Home
+                                icon = Icons.Default.Settings
                             ),
                         ),
-                        onItemClick = {
-                            println("Clicked on ${it.title}")
+                        onItemClick = { menuItem ->
+                            scope.launch {
+                                scaffoldState.drawerState.close()
+                                navController.navigate(menuItem.id) {
+                                    popUpTo(navController.graph.startDestinationId) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            }
                         }
                     )
                 }
