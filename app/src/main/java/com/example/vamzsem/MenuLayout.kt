@@ -1,38 +1,35 @@
 package com.example.vamzsem
 
+import ProfileViewModel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Scaffold
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.filled.DirectionsRun
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.launch
-
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.CalendarToday
-import androidx.compose.material.icons.filled.DirectionsRun
-import androidx.compose.material.icons.filled.Settings
-
-
 
 @Composable
 fun MenuLayout(
     windowInfo: WindowInfo,
     navController: NavHostController,
+    profileViewModel: ProfileViewModel,
     content: @Composable () -> Unit
 ) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+    val profileNameState = profileViewModel.profileName.collectAsState()
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -52,7 +49,7 @@ fun MenuLayout(
                     )
             ) {
                 Column {
-                    DrawerHeader()
+                    DrawerHeader(profileNameState.value)
                     DrawerBody(
                         items = listOf(
                             MenuItem(
@@ -124,6 +121,20 @@ fun MenuLayout(
                     }
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun DrawerHeader(profileName: String) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = "Welcome, $profileName", style = MaterialTheme.typography.h6)
         }
     }
 }

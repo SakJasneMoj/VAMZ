@@ -1,6 +1,6 @@
 package com.example.vamzsem
 
-
+import ProfileViewModel
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,12 +18,13 @@ import java.util.*
 @Composable
 fun CaloriesScreen(
     navController: NavHostController,
-    foodViewModel: FoodViewModel
+    foodViewModel: FoodViewModel,
+    profileViewModel: ProfileViewModel
 ) {
     var showDialog by remember { mutableStateOf(false) }
     val windowInfo = rememberWindowInfo()
 
-    MenuLayout(windowInfo = windowInfo, navController = navController) {
+    MenuLayout(windowInfo = windowInfo, navController = navController, profileViewModel = profileViewModel) {
         if (windowInfo.screenWidthInfo is WindowInfo.WindowType.Compact) {
             Column(
                 modifier = Modifier
@@ -34,7 +35,7 @@ fun CaloriesScreen(
                         .fillMaxWidth()
                         .weight(1f)
                 ) {
-                    CalorieCounter(viewModel = foodViewModel)
+                    CalorieCounter(foodViewModel = foodViewModel, profileViewModel = profileViewModel)
                 }
 
                 Box(
@@ -65,7 +66,7 @@ fun CaloriesScreen(
                         .weight(1f)
                         .fillMaxHeight()
                 ) {
-                    CalorieCounter(viewModel = foodViewModel)
+                    CalorieCounter(foodViewModel = foodViewModel, profileViewModel = profileViewModel)
                 }
 
                 Box(

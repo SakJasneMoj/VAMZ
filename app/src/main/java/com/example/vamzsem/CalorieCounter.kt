@@ -1,7 +1,6 @@
 package com.example.vamzsem
 
-
-
+import ProfileViewModel
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.animateFloatAsState
@@ -22,8 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CalorieCounter(viewModel: FoodViewModel) {
-    val totalCalories by viewModel.totalCalories.collectAsState(initial = 0)
+fun CalorieCounter(foodViewModel: FoodViewModel, profileViewModel: ProfileViewModel) {
+    val totalCalories by foodViewModel.totalCalories.collectAsState(initial = 0)
+    val maxCalories by profileViewModel.caloriesMaxValue.collectAsState()
 
     Column(
         modifier = Modifier
@@ -32,7 +32,7 @@ fun CalorieCounter(viewModel: FoodViewModel) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        DrawCalorieArc(totalCalories, 2000)
+        DrawCalorieArc(totalCalories, maxCalories)
     }
 }
 

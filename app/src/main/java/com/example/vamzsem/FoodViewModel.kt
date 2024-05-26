@@ -77,15 +77,14 @@ class FoodViewModel(
 
 
 
-    fun fetchFoodsByDate(date: String, onResult: (Int) -> Unit) {
+
+    fun fetchFoodsByDate(date: String, onResult: (List<Food>) -> Unit) {
         viewModelScope.launch {
-            val userId = "1" // Replace with actual user ID logic
-            val calories = foodRepository.getTotalCaloriesByUserAndDate(userId, date).first()
-            onResult(calories)
+            val foodsForDate = foodRepository.getFoodByUserAndDate(currentUserId, date).first()
+            _foodList.value = foodsForDate ?: emptyList() // Handle null case
+            onResult(foodsForDate ?: emptyList())
         }
     }
-
-
 
 
 }

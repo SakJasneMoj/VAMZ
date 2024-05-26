@@ -1,25 +1,24 @@
 package com.example.vamzsem
 
-
+import ProfileViewModel
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-
 @Composable
 fun CalendarScreen(
     navController: NavHostController,
     timerViewModel: TimerViewModel,
-    foodViewModel: FoodViewModel
+    foodViewModel: FoodViewModel,
+    profileViewModel: ProfileViewModel
 ) {
     val windowInfo = rememberWindowInfo()
     var selectedDate by remember { mutableStateOf("") }
@@ -33,12 +32,12 @@ fun CalendarScreen(
         timerViewModel.getTimersForDate(today) { activities ->
             totalExerciseTime = activities.sumOf { it.timeSpent }
         }
-        foodViewModel.fetchFoodsByDate(today) { calories ->
-            totalCalories = calories
+        foodViewModel.fetchFoodsByDate(today) { foods ->
+            totalCalories = foods.sumOf { it.calories ?: 0 }
         }
     }
 
-    MenuLayout(windowInfo = windowInfo, navController = navController) {
+    MenuLayout(windowInfo = windowInfo, navController = navController, profileViewModel = profileViewModel) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -52,8 +51,8 @@ fun CalendarScreen(
                 timerViewModel.getTimersForDate(date) { activities ->
                     totalExerciseTime = activities.sumOf { it.timeSpent }
                 }
-                foodViewModel.fetchFoodsByDate(date) { calories ->
-                    totalCalories = calories
+                foodViewModel.fetchFoodsByDate(date) { foods ->
+                    totalCalories = foods.sumOf { it.calories ?: 0 }
                 }
             }
 

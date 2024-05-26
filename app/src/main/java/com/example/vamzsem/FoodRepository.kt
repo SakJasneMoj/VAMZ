@@ -35,5 +35,4 @@ class FoodRepository(private val dao: FoodDao) {
     }
 
 
-
 }
